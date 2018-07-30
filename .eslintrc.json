@@ -1,0 +1,39 @@
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": false
+  },
+  "overrides": [
+    {
+      "files": ["**/*.test.js"],
+      "rules": {
+        "no-undef": "off"
+      }
+    }
+  ],
+  "rules": {
+    "indent": "off",
+    "react/jsx-filename-extension": "off",
+    "react/require-default-props": "off",
+    "react/jsx-indent": "off",
+    "function-paren-newline": "off",
+    "arrow-parens": "off",
+    "comma-dangle": "off",
+    "import/prefer-default-export": "off",
+    "object-curly-newline": "off",
+    "no-confusing-arrow": "off",
+    "no-underscore-dangle": "off",
+    "jsx-a11y/label-has-for": [
+      2,
+      {
+        "components": ["Label"],
+        "required": {
+          "some": ["nesting", "id"]
+        },
+        "allowChildren": false
+      }
+    ]
+  }
+}
