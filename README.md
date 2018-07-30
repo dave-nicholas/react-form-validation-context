@@ -1,11 +1,17 @@
-# react-form-context
+# react-form-validation-context
 
 A lightweight react form validation library for functional programming.
 
 ## Installation
 
 ```
-yarn add react-form-context
+yarn add react-form-validation-context
+```
+
+Or 
+
+```
+npm install --save react-form-validation-context
 ```
 
 ## Usage

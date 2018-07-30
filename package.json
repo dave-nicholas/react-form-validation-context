@@ -6,6 +6,7 @@
   "repository": "git@github.com:dave-nicholas/react-form-validation-context.git",
   "author": "Dave Nicholas <davenicholasuk@gmail.com>",
   "license": "MIT",
+  "files": [ "dist", "src" ],
   "scripts": {
     "build": "parcel build src/index.js",
     "test": "jest"
