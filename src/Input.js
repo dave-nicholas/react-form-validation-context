@@ -1,4 +1,6 @@
-import React, { Component } from "react";
+/* eslint no-undef: 1 */
+
+import React, { Component } from 'react';
 
 class FormInput extends Component {
   componentDidMount() {
@@ -19,30 +21,30 @@ class FormInput extends Component {
               }
             }, 200);
     this.f = _f => _f();
-    this.family.forEach(element => element.addEventListener("blur", this.blur));
+    this.family.forEach(element => element.addEventListener('blur', this.blur));
     invalidateParentForm();
   }
 
   componentWillUnmount() {
     clearTimeout(this.f);
     this.family.forEach(element =>
-      element.removeEventListener("blur", this.blur)
+      element.removeEventListener('blur', this.blur)
     );
     this.reset();
   }
 
   blur = () => {
-    const { id, invalidateParentForm } = this.props;
+    const { id, invalidateParentForm, setShowError } = this.props;
     this.f(() => {
-      showErrors[id] = true;
+      setShowError(id);
       invalidateParentForm();
     });
   };
 
   reset() {
-    const { id } = this.props;
-    inputErrors[id] = 0;
-    showErrors[id] = false;
+    const { id, setShowError, setError } = this.props;
+    setError(id, 0);
+    setShowError(id, false);
   }
 
   render() {
@@ -51,17 +53,24 @@ class FormInput extends Component {
   }
 }
 
-/* eslint-disable-next-line react/prop-types */
-export const withForm = C => ({ id, value, validations, ...props }) => (
+export const makeWithForm = (
+  Consumer,
+  showErrors,
+  inputErrors,
+  setError,
+  setShowError
+) => C => ({ id, value, validations, ...props }) => (
   <Consumer>
     {({ setInputErrors, invalidateParentForm }) => {
-      if (typeof id === "undefined") {
-        throw new Error("withForm requires consumers to have an id prop");
+      if (typeof id === 'undefined') {
+        throw new Error(
+          'react-form-context: withForm requires consumers to have an id prop'
+        );
       }
 
       const validationResults = validations
         ? validations
-            .map(v => (typeof v === "function" ? v(value) : null))
+            .map(v => (typeof v === 'function' ? v(value) : null))
             .filter(v => v && !!v.length)
         : 0;
       const inValid = !!validationResults.length;
@@ -69,7 +78,7 @@ export const withForm = C => ({ id, value, validations, ...props }) => (
       const errorToShow = inValid ? validationResults[0] : null;
 
       if (inputErrors[id] !== validationResults.length) {
-        inputErrors[id] = validationResults.length;
+        setError(id, validationResults.length);
       }
 
       return (
@@ -77,6 +86,8 @@ export const withForm = C => ({ id, value, validations, ...props }) => (
           {...props}
           C={C}
           id={id}
+          setError={setError}
+          setShowError={setShowError}
           value={value}
           error={errorToShow}
           showErrors={showErrors[id]}

@@ -1,16 +1,17 @@
 import React from 'react';
 
-export const makeWithFormButton = Consumer => B => ({
-  /* eslint-disable-next-line react/prop-types */
-  onClick: propOnClick,
-  ...props
-}) => (
+export const makeWithFormButton = (
+  Consumer,
+  showErrors,
+  inputErrors,
+  setShowError
+) => B => ({ onClick: propOnClick, ...props }) => (
   <Consumer>
     {({ invalidateParentForm, onErrorCallback }) => (
       <B
         onClick={() => {
           Object.keys(showErrors).forEach(k => {
-            showErrors[k] = true;
+            setShowError(k);
           });
 
           if (onErrorCallback) onErrorCallback(inputErrors);
