@@ -33,13 +33,13 @@ class FormInput extends Component {
     this.reset();
   }
 
-  blur = () => {
+  blur() {
     const { id, invalidateParentForm, setShowError } = this.props;
     this.f(() => {
       setShowError(id);
       invalidateParentForm();
     });
-  };
+  }
 
   reset() {
     const { id, setShowError, setError } = this.props;
