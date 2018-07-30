@@ -6,8 +6,26 @@
   "repository": "git@github.com:dave-nicholas/react-form-context.git",
   "author": "Dave Nicholas <davenicholasuk@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "parcel build src/index.js"
+  },
   "devDependencies": {
-    "typescript": "^2.9.2",
-    "typings": "^2.1.1"
+    "babel-eslint": "^8.2.6",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "eslint": "^5.2.0",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.10.0",
+    "parcel-bundler": "^1.9.7"
+  },
+  "dependencies": {
+    "react": "^16.4.1"
+  },
+  "peerDependencies": {
+    "react": "^16.4.1"
   }
 }

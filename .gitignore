@@ -4,10 +4,10 @@
 /node_modules
 
 # production
-/build
+/dist
 
-# story book
-/docs
+# cache
+/.cache
 
 # misc
 .DS_Store
