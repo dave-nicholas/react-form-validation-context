@@ -59,6 +59,31 @@ const Button = withFormButton(({ children, ...rest }) => (
 
 ## Implementation
 
+### Validations
+
+`validators` contain a set of validators for performing input validations
+
+
+`validators.requiredWithMessage`
+`validators.required`
+`validators.email`
+`validators.maxLength`
+`validators.minLength`
+`validators.exactLength`
+`validators.minValue`
+`validators.maxValue`
+`validators.maxFloatValue`
+`validators.decimalWithDot`
+`validators.number`
+`validators.decimalWithCommaDot`
+`validators.nationalInsurance`
+`validators.alphaNumeric2WithMessage`
+`validators.alphaNumeric2`
+`validators.onlyAlphaNumeric`
+`validators.address`
+`validators.postcode`
+
+
 ### Example
 
 ```javascript
@@ -77,13 +102,13 @@ class App extends Component {
       <div className="App">
         <Form>
           <Input
-            id="asdfad"
+            id="name"
             value={this.state.name}
             onChange={e => this.setState({ name: e.target.value })}
-            validations={[validators.required]}
+            validations={[validators.requiredWithMessage('Please enter a name'), validators.maxLength(20)]}
           />
           <Input
-            id="asdfadsss"
+            id="email"
             value={this.state.email}
             onChange={e => this.setState({ email: e.target.value })}
             validations={[validators.required, validators.email]}
