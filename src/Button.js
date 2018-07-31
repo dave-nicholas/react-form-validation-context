@@ -1,15 +1,15 @@
 import React from 'react';
 
-export const makeWithFormButton = (
-  Consumer,
-  showErrors,
-  inputErrors,
-  setShowError
-) => B => ({ onClick: propOnClick, ...props }) => (
+export const makeWithFormButton = (Consumer, setShowError, getErrors) => B => ({
+  onClick: propOnClick,
+  ...props
+}) => (
   <Consumer>
     {({ invalidateParentForm, onErrorCallback }) => (
       <B
         onClick={() => {
+          const { showErrors, inputErrors } = getErrors();
+
           Object.keys(showErrors).forEach(k => {
             setShowError(k);
           });

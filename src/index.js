@@ -25,18 +25,19 @@ const setShowError = (k, show = true) => {
   showErrors[k] = show;
 };
 
+const getErrors = () => ({ inputErrors, showErrors });
+
 export const withFormButton = makeWithFormButton(
   Consumer,
-  showErrors,
-  inputErrors,
-  setShowError
+  setShowError,
+  getErrors
 );
 
 export const withForm = makeWithForm(
   Consumer,
-  showErrors,
-  inputErrors,
-  setError
+  setError,
+  setShowError,
+  getErrors
 );
 
 export const Form = makeForm(Provider, resetErrors);
