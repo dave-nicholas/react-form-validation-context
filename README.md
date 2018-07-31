@@ -124,4 +124,4 @@ class App extends Component {
 
 ### Contributors
 
-[Dave Nicholas](https://github.com/dave-nicholas), [Martin Carder](https://github.com/MartinCarder), [Ekta Carder](https://github.com/EktaWadhwani), [Mariana Nicholas](https://github.com/manicholas) 
+[Dave Nicholas](https://github.com/dave-nicholas), [Martin Carder](https://github.com/MartinCarder), [Ekta Wadhwani](https://github.com/EktaWadhwani), [Mariana Nicholas](https://github.com/manicholas) 
