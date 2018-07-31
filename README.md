@@ -45,7 +45,7 @@ const Input = withForm(({ value, onChange, error, showErrors }) => (
 
 #### withFormButton
 
-`withFormButton` is a higher order component that can a sumbit or action button
+`withFormButton` is a higher order component that can a submit or action button
 
 ```javascript
 const Button = withFormButton(({ children, ...rest }) => (
