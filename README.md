@@ -2,6 +2,8 @@
 
 A lightweight react form validation library that uses HOCs (higher order components) for functional programming.
 
+[![Build Status](https://travis-ci.org/dave-nicholas/react-form-validation-context.svg?branch=master)](https://travis-ci.org/dave-nicholas/react-form-validation-context)
+
 ## Installation
 
 ```
