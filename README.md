@@ -33,8 +33,10 @@ import {
 
 #### withForm
 
-`withForm` is a higher order component that can wrap any kind of user input
+`withForm` is a higher order component that can wrap any kind of user input.
+Below are some examples of how to create some form connected components
 
+##### Text inputs
 
 ```javascript
 const Input = withForm(({ value, onChange, error, showErrors }) => (
@@ -44,6 +46,51 @@ const Input = withForm(({ value, onChange, error, showErrors }) => (
   </div>
 ));
 ```
+
+##### Select options
+
+```javascript
+const Dropdown = withForm(
+  ({ value, onChange, error, showErrors, options, id }) => (
+    <div>
+      <select id={id} onChange={onChange}>
+        {options.map(({ label, val }) => (
+          <option key={val} checked={val === value} value={val}>
+            {label}
+          </option>
+        ))}
+      </select>
+      {showErrors && error && <span>{error}</span>}
+    </div>
+  )
+);
+```
+
+##### Radio buttons
+
+```javascript
+const Radios = withForm(
+  ({ value, onChange, error, showErrors, options, id }) => (
+    <div>
+      {options.map(({ label, val }) => (
+        <React.Fragment key={val}>
+          <input
+            type="radio"
+            onChange={() => onChange(val)}
+            name={id}
+            checked={value === val}
+          />
+          <label onClick={() => onChange(val)} htmlFor={id}>
+            <span>{label}</span>
+          </label>
+        </React.Fragment>
+      ))}
+      {showErrors && error && <span>{error}</span>}
+    </div>
+  )
+);
+```
+
 
 #### withFormButton
 
@@ -113,6 +160,31 @@ class App extends Component {
             value={this.state.email}
             onChange={e => this.setState({ email: e.target.value })}
             validations={[validators.required, validators.email]}
+          />
+          <Dropdown
+            id="age"
+            value={this.state.age}
+            onChange={e => this.setState({ age: e.target.value })}
+            options={[
+              { label: "one", val: 1 },
+              { label: "ten", val: 10 },
+              { label: "twenty", val: 20 },
+              { label: "thirty", val: 30 }
+            ]}
+            validations={[validators.required, validators.minValue(15)]}
+          />
+          <Radios
+            id="status"
+            value={this.state.status}
+            onChange={status => this.setState({ status })}
+            options={[
+              { label: "alive", val: "alive" },
+              { label: "dead", val: "dead" },
+              { label: "on holiday", val: "on holiday" }
+            ]}
+            validations={[
+              validators.requiredWithMessage("What is your status?")
+            ]}
           />
           <Button onClick={() => this.submit()}>Submit...</Button>
         </Form>
