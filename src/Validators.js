@@ -85,3 +85,8 @@ export const postcode = value =>
     value
   ) &&
   'Please enter a valid postcode';
+
+export const allowedValues = (message, values) => value => {
+  const v = Number.isNaN(parseFloat(value)) ? value : parseFloat(value);
+  return !values.includes(v) && (message || 'This is not allowed value');
+};
