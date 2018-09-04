@@ -19,7 +19,7 @@ export const makeWithFormButton = (Consumer, setShowError, getErrors) => B => ({
           if (
             propOnClick &&
             Object.keys(inputErrors)
-              .map(k => inputErrors[k])
+              .map(k => inputErrors[k].length)
               .every(e => !e)
           ) {
             propOnClick();

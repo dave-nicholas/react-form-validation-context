@@ -25,7 +25,8 @@ import {
   Form,
   withForm,
   validators,
-  withFormButton
+  withFormButton,
+  FormErrors // Optional, for custom errors
 } from "react-form-validation-context";
 ```
 
@@ -104,6 +105,34 @@ const Button = withFormButton(({ children, ...rest }) => (
 ));
 ```
 
+## Errors
+
+### Inline errors
+
+Errors will be passed to the components by default.
+To suppress inline errors you can add the prop `hideErrors`.
+
+For example: 
+
+```Javascript
+<Input hideErrors ... />
+```
+
+### Error Component
+
+You can use the `FormErrors` component to display errors for specific components or for all errors on the form.
+
+```javascript
+<FormErrors /> // will display all form errors
+
+<FormErrors style={{color: 'red'}} className="some-style" /> // to style errors you may pass props
+
+<FormErrors errorsfor="email" /> // display errors for a single component
+
+<FormErrors errorsfor={["name", "email"]} /> // display errors for multiple components
+
+<FormErrors render={error => <span className="error-styles">{error}</span>} /> // use a custom renderer
+```
 
 ## Implementation
 
@@ -149,6 +178,7 @@ class App extends Component {
     return (
       <div className="App">
         <Form>
+          <FormErrors />
           <Input
             id="name"
             value={this.state.name}

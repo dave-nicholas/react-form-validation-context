@@ -15,7 +15,7 @@ class FormInput extends Component {
 
   reset() {
     const { id, setShowError, seterror } = this.props;
-    seterror(id, 0);
+    seterror(id, []);
     setShowError(id, false);
   }
 
@@ -30,10 +30,10 @@ export const makeWithForm = (
   setError,
   setShowError,
   getErrors
-) => C => (passedProps) => (
+) => C => passedProps => (
   <Consumer>
     {({ setInputErrors, invalidateParentForm }) => {
-      const { id, value, validations, checked } = passedProps;
+      const { id, value, validations, checked, hideErrors } = passedProps;
       if (typeof id === 'undefined') {
         throw new Error(
           'react-form-context: withForm requires consumers to have an id prop'
@@ -53,13 +53,16 @@ export const makeWithForm = (
         ? validations
             .map(v => (typeof v === 'function' ? v(validationValue) : null))
             .filter(v => v && !!v.length)
-        : 0;
+        : [];
       const inValid = !!validationResults.length;
 
       const errorToShow = inValid ? validationResults[0] : null;
 
-      if (inputErrors[id] !== validationResults.length) {
-        setError(id, validationResults.length);
+      if (
+        typeof inputErrors[id] === 'undefined' ||
+        inputErrors[id].join('-') !== validationResults.join('-')
+      ) {
+        setError(id, validationResults);
       }
 
       return (
@@ -71,7 +74,7 @@ export const makeWithForm = (
           setShowError={setShowError}
           value={value}
           error={errorToShow}
-          showErrors={showErrors[id]}
+          showErrors={!hideErrors && showErrors[id]}
           setInputErrors={setInputErrors}
           invalidateParentForm={invalidateParentForm}
         />

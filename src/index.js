@@ -3,6 +3,7 @@ import { createContext } from 'react';
 import { makeWithFormButton } from './Button';
 import { makeWithForm } from './Input';
 import { makeForm } from './Form';
+import { makeFormErrors } from './FormErrors';
 import * as validators from './Validators';
 
 const FormContext = createContext();
@@ -39,6 +40,8 @@ export const withForm = makeWithForm(
   setShowError,
   getErrors
 );
+
+export const FormErrors = makeFormErrors(Consumer, getErrors);
 
 export const Form = makeForm(Provider, resetErrors);
 

@@ -17,6 +17,7 @@
     "indent": "off",
     "react/jsx-filename-extension": "off",
     "react/require-default-props": "off",
+    "react/jsx-one-expression-per-line": "off",
     "react/jsx-indent": "off",
     "react/prop-types": "off",
     "function-paren-newline": "off",
