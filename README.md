@@ -159,6 +159,7 @@ You can use the `FormErrors` component to display errors for specific components
 `validators.onlyAlphaNumeric`
 `validators.address`
 `validators.postcode`
+`validators.allowedValues`
 
 
 ### Example

@@ -12,7 +12,8 @@ import {
   alphaNumeric2,
   onlyAlphaNumeric,
   address,
-  postcode
+  postcode,
+  allowedValues
 } from '../Validators';
 
 describe('Input validator', () => {
@@ -221,5 +222,21 @@ describe('Input validator', () => {
 
   it('postcode - Valid', () => {
     expect(postcode('rh11 0uw')).toEqual(false);
+  });
+
+  it('allowedValues - Valid', () => {
+    expect(
+      allowedValues('Please enter a valid option', ['red', 'green', 'blue'])(
+        'green'
+      )
+    ).toEqual(false);
+  });
+
+  it('allowedValues - Invalid', () => {
+    expect(
+      allowedValues('Please enter a valid option', ['red', 'green', 'blue'])(
+        'purple'
+      )
+    ).toEqual('Please enter a valid option');
   });
 });
