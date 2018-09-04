@@ -30,20 +30,28 @@ export const makeWithForm = (
   setError,
   setShowError,
   getErrors
-) => C => ({ id, value, validations, ...props }) => (
+) => C => (passedProps) => (
   <Consumer>
     {({ setInputErrors, invalidateParentForm }) => {
+      const { id, value, validations, checked } = passedProps;
       if (typeof id === 'undefined') {
         throw new Error(
           'react-form-context: withForm requires consumers to have an id prop'
         );
       }
 
+      const validationValue = Object.prototype.hasOwnProperty.call(
+        passedProps,
+        'checked'
+      )
+        ? checked
+        : value;
+
       const { inputErrors, showErrors } = getErrors();
 
       const validationResults = validations
         ? validations
-            .map(v => (typeof v === 'function' ? v(value) : null))
+            .map(v => (typeof v === 'function' ? v(validationValue) : null))
             .filter(v => v && !!v.length)
         : 0;
       const inValid = !!validationResults.length;
