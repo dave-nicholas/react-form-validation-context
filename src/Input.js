@@ -64,7 +64,7 @@ export const makeWithForm = (
 
       return (
         <FormInput
-          {...props}
+          {...passedProps}
           C={C}
           id={id}
           seterror={setError}
