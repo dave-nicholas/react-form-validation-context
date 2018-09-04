@@ -127,9 +127,9 @@ You can use the `FormErrors` component to display errors for specific components
 
 <FormErrors style={{color: 'red'}} className="some-style" /> // to style errors you may pass props
 
-<FormErrors errorsfor="email" /> // display errors for a single component
+<FormErrors errorsFor="email" /> // display errors for a single component
 
-<FormErrors errorsfor={["name", "email"]} /> // display errors for multiple components
+<FormErrors errorsFor={["name", "email"]} /> // display errors for multiple components
 
 <FormErrors render={error => <span className="error-styles">{error}</span>} /> // use a custom renderer
 ```
