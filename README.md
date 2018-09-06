@@ -131,7 +131,14 @@ You can use the `FormErrors` component to display errors for specific components
 
 <FormErrors errorsFor={["name", "email"]} /> // display errors for multiple components
 
-<FormErrors render={error => <span className="error-styles">{error}</span>} /> // use a custom renderer
+// use a custom renderer
+<FormErrors
+    render={(error, idOfInputWithError) => (
+      <span key={idOfInputWithError} className="error-styles">
+        {error}
+      </span>
+    )}
+  />
 ```
 
 ## Implementation

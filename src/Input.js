@@ -32,7 +32,7 @@ export const makeWithForm = (
   getErrors
 ) => C => passedProps => (
   <Consumer>
-    {({ setInputErrors, invalidateParentForm }) => {
+    {({ invalidateParentForm }) => {
       const { id, value, validations, checked, hideErrors } = passedProps;
       if (typeof id === 'undefined') {
         throw new Error(
@@ -63,6 +63,7 @@ export const makeWithForm = (
         inputErrors[id].join('-') !== validationResults.join('-')
       ) {
         setError(id, validationResults);
+        setTimeout(() => invalidateParentForm(), 10);
       }
 
       return (
@@ -75,7 +76,6 @@ export const makeWithForm = (
           value={value}
           error={errorToShow}
           showErrors={!hideErrors && showErrors[id]}
-          setInputErrors={setInputErrors}
           invalidateParentForm={invalidateParentForm}
         />
       );

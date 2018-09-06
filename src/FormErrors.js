@@ -21,9 +21,11 @@ export const makeFormErrors = (Consumer, getErrors) => ({
           .map(
             k =>
               render ? (
-                render(inputErrors[k][0])
+                render(inputErrors[k][0], k)
               ) : (
-                <p {...props}>{inputErrors[k][0]}</p>
+                <p key={k} {...props}>
+                  {inputErrors[k][0]}
+                </p>
               )
           )
       }
