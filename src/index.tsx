@@ -9,7 +9,7 @@ import * as validators from './Validators';
 export interface IInputErrors { [index: string]: string[] }
 export interface IShowErrors { [index: string]: boolean }
 export interface ISetError { (k: string, errors: string[]): void }
-export interface ISetShowError { (k: string, shoe: boolean): void }
+export interface ISetShowError { (k: string, show?: boolean): void }
 export interface IGetErrors {
   (): { inputErrors: IInputErrors, showErrors: IShowErrors };
 }
@@ -34,7 +34,7 @@ const setShowError: ISetShowError = (k, show = true) => {
   showErrors[k] = show;
 };
 
-const getErrors = () => ({ inputErrors, showErrors });
+const getErrors: IGetErrors = () => ({ inputErrors, showErrors });
 
 export const withFormButton = makeWithFormButton(
   Consumer,

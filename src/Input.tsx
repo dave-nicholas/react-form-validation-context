@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { ISetError, ISetShowError, IGetErrors } from './index';
+import { ISetError, ISetShowError, IGetErrors } from './';
 
 interface PropsType {
   invalidateParentForm: () => void;

@@ -3,13 +3,21 @@
 
 import React, { Component } from 'react';
 
-export const makeForm = (Provider, resetErrors) => {
-  class Form extends Component {
+interface PropsType {
+  onErrorCallback: () => void;
+}
+
+export const makeForm = (
+  Provider: React.ComponentType<React.ProviderProps<any>>,
+  resetErrors: () => void
+) => {
+  class Form extends Component<PropsType, {}> {
     /* eslint-disable */
     state = {
+      isValid: null,
       // The below line is here becasue forceUpdate doesn't seem to work with context
       invalidateParentForm: () => this.setState({ updated: true }),
-      setIsValidState: isValid =>
+      setIsValidState: (isValid: boolean): void | null =>
         isValid !== this.state.isValid
           ? this.setState({ isValid: false })
           : null
