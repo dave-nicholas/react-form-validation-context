@@ -9,7 +9,7 @@ export const makeWithFormButton = (
   Consumer: React.ComponentType<React.ConsumerProps<any>>,
   setShowError: ISetShowError,
   getErrors: IGetErrors
-) => (B: React.ComponentClass<IClickable>) => ({
+) => (B: React.ComponentClass<IClickable> | React.StatelessComponent<any>) => ({
   onClick: propOnClick,
   ...props
 }: IClickable): JSX.Element => (

@@ -1,10 +1,8 @@
 # react-form-validation-context
 
-A lightweight react form validation library that uses HOCs (higher order components) for functional programming.
+A lightweight react form validation library that uses HOCs (higher order components) for functional programming, with typescript support.
 
 [![Build Status](https://travis-ci.org/dave-nicholas/react-form-validation-context.svg?branch=master)](https://travis-ci.org/dave-nicholas/react-form-validation-context)
-
-* Wtih Typescript typings.
 
 ### Online Demo Example
 
@@ -36,14 +34,16 @@ import {
 } from "react-form-validation-context";
 ```
 
-### Using the higher order components
+## Using the higher order components
 
-#### withForm
+### withForm
 
 `withForm` is a higher order component that can wrap any kind of user input.
 Below are some examples of how to create some form connected components
 
-##### Text inputs
+#### Text inputs
+
+Javascript
 
 ```javascript
 const Input = withForm(({ value, onChange, error, showErrors }) => (
@@ -54,13 +54,33 @@ const Input = withForm(({ value, onChange, error, showErrors }) => (
 ));
 ```
 
-##### Select options
+Typescript
+
+```javascript
+export const InputComponent: React.SFC<any> = ({
+  value,
+  onChange,
+  error,
+  showErrors
+}: any) => (
+  <div>
+    <input type="text" onChange={onChange} value={value} />
+    {showErrors && error && <span>{error}</span>}
+  </div>
+);
+
+const Input = withForm(InputComponent);
+```
+
+#### Select options
+
+Javascript
 
 ```javascript
 const Dropdown = withForm(
-  ({ value, onChange, error, showErrors, options, id }) => (
+  ({ value, onChange, error, showErrors, options}) => (
     <div>
-      <select id={id} onChange={onChange}>
+      <select onChange={onChange}>
         {options.map(({ label, val }) => (
           <option key={val} checked={val === value} value={val}>
             {label}
@@ -73,7 +93,34 @@ const Dropdown = withForm(
 );
 ```
 
-##### Radio buttons
+Typescript 
+
+```javascript
+export const DropdownComponent: React.SFC<any> = ({
+  value,
+  onChange,
+  error,
+  showErrors,
+  options
+}: any) => (
+  <div>
+    <select onChange={onChange}>
+      {options.map(({ label, val }: { label: string; val: string }) => (
+        <option key={val} selected={val === value} value={val}>
+          {label}
+        </option>
+      ))}
+    </select>
+    {showErrors && error && <span>{error}</span>}
+  </div>
+);
+
+const Dropdown = withForm(DropdownComponent);
+```
+
+#### Radio buttons
+
+Javascript
 
 ```javascript
 const Radios = withForm(
@@ -98,10 +145,45 @@ const Radios = withForm(
 );
 ```
 
+```javascript
+export const RadioComponent: React.SFC<any> = ({
+  value,
+  onChange,
+  error,
+  showErrors,
+  options,
+  id
+}: any) => (
+  <div>
+    {options.map(({ label, val }: { label: string; val: string }) => {
+      const handleChange = () => onChange(val);
 
-#### withFormButton
+      return (
+        <React.Fragment key={val}>
+          <input
+            type="radio"
+            onChange={handleChange}
+            name={id}
+            checked={value === val}
+          />
+          <label onClick={handleChange} htmlFor={id}>
+            <span>{label}</span>
+          </label>
+        </React.Fragment>
+      );
+    })}
+    {showErrors && error && <span>{error}</span>}
+  </div>
+);
+
+const Radios = withForm(RadioComponent);
+```
+
+### withFormButton
 
 `withFormButton` is a higher order component that can a submit or action button
+
+Javascript
 
 ```javascript
 const Button = withFormButton(({ children, ...rest }) => (
@@ -109,6 +191,18 @@ const Button = withFormButton(({ children, ...rest }) => (
     {children}
   </button>
 ));
+```
+
+Typescript
+
+```javascript
+const ButtonComponent: React.SFC<any> = ({ children, ...rest }) => (
+  <button type="button" {...rest}>
+    {children}
+  </button>
+);
+
+const Button = withFormButton(ButtonComponent);
 ```
 
 ## Errors
