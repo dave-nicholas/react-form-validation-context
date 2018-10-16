@@ -56,7 +56,7 @@ const Input = withForm(({ value, onChange, error, showErrors }) => (
 
 Typescript
 
-```typescript
+```javascript
 export const InputComponent: React.SFC<any> = ({
   value,
   onChange,
@@ -95,7 +95,7 @@ const Dropdown = withForm(
 
 Typescript 
 
-```typescript
+```javascript
 export const DropdownComponent: React.SFC<any> = ({
   value,
   onChange,
@@ -145,7 +145,7 @@ const Radios = withForm(
 );
 ```
 
-```typescript
+```javascript
 export const RadioComponent: React.SFC<any> = ({
   value,
   onChange,
@@ -195,7 +195,7 @@ const Button = withFormButton(({ children, ...rest }) => (
 
 Typescript
 
-```typescript
+```javascript
 const ButtonComponent: React.SFC<any> = ({ children, ...rest }) => (
   <button type="button" {...rest}>
     {children}
