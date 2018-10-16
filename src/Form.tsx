@@ -1,6 +1,3 @@
-/* eslint no-undef: 1 */
-/* eslint no-return-assign: 1 */
-
 import React, { Component } from 'react';
 
 export interface PropsType {
@@ -12,7 +9,6 @@ export const makeForm = (
   resetErrors: () => void
 ): React.ComponentClass<PropsType, {}> => {
   class Form extends Component<PropsType, {}> {
-    /* eslint-disable */
     state = {
       isValid: null,
       // The below line is here becasue forceUpdate doesn't seem to work with context
@@ -22,12 +18,11 @@ export const makeForm = (
           ? this.setState({ isValid: false })
           : null
     };
-    /* eslint-enable */
 
     componentWillMount() {
       resetErrors();
       const { onErrorCallback } = this.props;
-      /* eslint-disable-next-line react/no-unused-state */
+
       this.setState({ onErrorCallback });
     }
 
@@ -36,7 +31,6 @@ export const makeForm = (
 
       return (
         <Provider value={this.state}>
-          {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
           <form
             {...props}
             onSubmit={e => {
