@@ -1,10 +1,8 @@
 # react-form-validation-context
 
-A lightweight react form validation library that uses HOCs (higher order components) for functional programming.
+A lightweight react form validation library that uses HOCs (higher order components) for functional programming, with typescript support.
 
 [![Build Status](https://travis-ci.org/dave-nicholas/react-form-validation-context.svg?branch=master)](https://travis-ci.org/dave-nicholas/react-form-validation-context)
-
-* Wtih Typescript typings.
 
 ### Online Demo Example
 
@@ -36,14 +34,14 @@ import {
 } from "react-form-validation-context";
 ```
 
-### Using the higher order components
+## Using the higher order components
 
-#### withForm
+### withForm
 
 `withForm` is a higher order component that can wrap any kind of user input.
 Below are some examples of how to create some form connected components
 
-##### Text inputs
+#### Text inputs
 
 Javascript
 
@@ -74,7 +72,7 @@ export const InputComponent: React.SFC<any> = ({
 const Input = withForm(InputComponent);
 ```
 
-##### Select options
+#### Select options
 
 Javascript
 
@@ -120,7 +118,7 @@ export const DropdownComponent: React.SFC<any> = ({
 const Dropdown = withForm(DropdownComponent);
 ```
 
-##### Radio buttons
+#### Radio buttons
 
 Javascript
 
@@ -181,7 +179,7 @@ export const RadioComponent: React.SFC<any> = ({
 const Radios = withForm(RadioComponent);
 ```
 
-#### withFormButton
+### withFormButton
 
 `withFormButton` is a higher order component that can a submit or action button
 
