@@ -3,14 +3,14 @@
 
 import React, { Component } from 'react';
 
-interface PropsType {
+export interface PropsType {
   onErrorCallback: () => void;
 }
 
 export const makeForm = (
   Provider: React.ComponentType<React.ProviderProps<any>>,
   resetErrors: () => void
-) => {
+): React.ComponentClass<PropsType, {}> => {
   class Form extends Component<PropsType, {}> {
     /* eslint-disable */
     state = {

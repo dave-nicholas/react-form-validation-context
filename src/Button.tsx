@@ -1,7 +1,7 @@
 import React from 'react';
 import { ISetShowError, IGetErrors } from '.';
 
-interface IClickable {
+export interface IClickable {
   onClick: () => void;
 }
 
@@ -12,7 +12,7 @@ export const makeWithFormButton = (
 ) => (B: React.ComponentClass<IClickable>) => ({
   onClick: propOnClick,
   ...props
-}: IClickable) => (
+}: IClickable): JSX.Element => (
   <Consumer>
     {({ invalidateParentForm, onErrorCallback }) => (
       <B
