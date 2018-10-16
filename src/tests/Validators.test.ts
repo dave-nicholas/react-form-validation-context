@@ -116,7 +116,6 @@ describe('Input validator', () => {
   it('number -Valid', () => {
     expect(number('00000499')).toEqual(false);
     expect(number(499)).toEqual(false);
-    expect(number()).toEqual(undefined);
   });
 
   it('nationalInsurance - Invalid', () => {
@@ -135,7 +134,6 @@ describe('Input validator', () => {
     expect(nationalInsurance('AB999999A')).toEqual(false);
     expect(nationalInsurance('AB123123D')).toEqual(false);
     expect(nationalInsurance('AB000000D')).toEqual(false);
-    expect(nationalInsurance()).toEqual(undefined);
   });
 
   it('alphaNumeric2 - Invalid', () => {
@@ -161,7 +159,6 @@ describe('Input validator', () => {
     expect(alphaNumeric2('1234')).toEqual(false);
     expect(alphaNumeric2('AB-12')).toEqual(false);
     expect(alphaNumeric2("AB'12")).toEqual(false);
-    expect(alphaNumeric2()).toEqual(undefined);
   });
 
   it('onlyAlphaNumeric - Invalid', () => {
@@ -190,7 +187,6 @@ describe('Input validator', () => {
     expect(onlyAlphaNumeric('ab 12')).toEqual(false);
     expect(onlyAlphaNumeric('1234')).toEqual(false);
     expect(onlyAlphaNumeric('AB1234')).toEqual(false);
-    expect(onlyAlphaNumeric()).toEqual(undefined);
   });
 
   it('address - Invalid', () => {
@@ -212,7 +208,6 @@ describe('Input validator', () => {
     expect(address('AB1234')).toEqual(false);
     expect(address('00.99')).toEqual(false);
     expect(address('A-Z, 0-9, -  / , .')).toEqual(false);
-    expect(address()).toEqual(undefined);
   });
 
   it('postcode - Invalid', () => {

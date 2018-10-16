@@ -1,10 +1,15 @@
 import React from 'react';
+import { IGetErrors } from '.';
 
-export const makeFormErrors = (Consumer, getErrors) => ({
-  errorsFor,
-  render,
-  ...props
-}) => {
+export interface IFormErrors {
+  render: (error: string, id: string) => void;
+  errorsFor: string | string[];
+}
+
+export const makeFormErrors = (
+  Consumer: React.ComponentType<React.ConsumerProps<any>>,
+  getErrors: IGetErrors
+) => ({ errorsFor, render, ...props }: IFormErrors): JSX.Element => {
   const { inputErrors, showErrors } = getErrors();
   return (
     <Consumer>

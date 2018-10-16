@@ -1,0 +1,11 @@
+{
+  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "rules": {
+    "no-console": [true, "warning"]
+  },
+  "linterOptions": {
+    "exclude": [
+      "node_modules/**/*.ts",
+    ]
+  }
+}

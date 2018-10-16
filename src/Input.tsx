@@ -1,8 +1,16 @@
-/* eslint no-undef: 1 */
+import * as React from 'react';
 
-import React, { Component } from 'react';
+import { ISetError, ISetShowError, IGetErrors } from './';
 
-class FormInput extends Component {
+interface PropsType {
+  invalidateParentForm: () => void;
+  id: string 
+  setShowError: ISetShowError;
+  seterror: ISetError;
+  C: React.ComponentClass;
+}
+
+class FormInput extends React.Component<PropsType, {}> {
   componentDidMount() {
     const { invalidateParentForm } = this.props;
     this.reset();
@@ -26,13 +34,13 @@ class FormInput extends Component {
 }
 
 export const makeWithForm = (
-  Consumer,
-  setError,
-  setShowError,
-  getErrors
-) => C => passedProps => (
+  Consumer: React.ComponentType<React.ConsumerProps<any>>,
+  setError: ISetError,
+  setShowError: ISetShowError,
+  getErrors: IGetErrors
+) => (C: React.ComponentClass) => (passedProps:any) => (
   <Consumer>
-    {({ invalidateParentForm }) => {
+    {({ invalidateParentForm }: PropsType) => {
       const { id, value, validations, checked, hideErrors } = passedProps;
       if (typeof id === 'undefined') {
         throw new Error(
@@ -51,8 +59,8 @@ export const makeWithForm = (
 
       const validationResults = validations
         ? validations
-            .map(v => (typeof v === 'function' ? v(validationValue) : null))
-            .filter(v => v && !!v.length)
+            .map((v: any) => (typeof v === 'function' ? v(validationValue) : null))
+            .filter((v:any) => v && !!v.length)
         : [];
       const inValid = !!validationResults.length;
 
