@@ -45,6 +45,8 @@ Below are some examples of how to create some form connected components
 
 ##### Text inputs
 
+Javascript
+
 ```javascript
 const Input = withForm(({ value, onChange, error, showErrors }) => (
   <div>
@@ -54,13 +56,33 @@ const Input = withForm(({ value, onChange, error, showErrors }) => (
 ));
 ```
 
+Typescript
+
+```typescript
+export const InputComponent: React.SFC<any> = ({
+  value,
+  onChange,
+  error,
+  showErrors
+}: any) => (
+  <div>
+    <input type="text" onChange={onChange} value={value} />
+    {showErrors && error && <span>{error}</span>}
+  </div>
+);
+
+const Input = withForm(InputComponent);
+```
+
 ##### Select options
+
+Javascript
 
 ```javascript
 const Dropdown = withForm(
-  ({ value, onChange, error, showErrors, options, id }) => (
+  ({ value, onChange, error, showErrors, options}) => (
     <div>
-      <select id={id} onChange={onChange}>
+      <select onChange={onChange}>
         {options.map(({ label, val }) => (
           <option key={val} checked={val === value} value={val}>
             {label}
@@ -73,7 +95,34 @@ const Dropdown = withForm(
 );
 ```
 
+Typescript 
+
+```typescript
+export const DropdownComponent: React.SFC<any> = ({
+  value,
+  onChange,
+  error,
+  showErrors,
+  options
+}: any) => (
+  <div>
+    <select onChange={onChange}>
+      {options.map(({ label, val }: { label: string; val: string }) => (
+        <option key={val} selected={val === value} value={val}>
+          {label}
+        </option>
+      ))}
+    </select>
+    {showErrors && error && <span>{error}</span>}
+  </div>
+);
+
+const Dropdown = withForm(DropdownComponent);
+```
+
 ##### Radio buttons
+
+Javascript
 
 ```javascript
 const Radios = withForm(
@@ -98,10 +147,45 @@ const Radios = withForm(
 );
 ```
 
+```typescript
+export const RadioComponent: React.SFC<any> = ({
+  value,
+  onChange,
+  error,
+  showErrors,
+  options,
+  id
+}: any) => (
+  <div>
+    {options.map(({ label, val }: { label: string; val: string }) => {
+      const handleChange = () => onChange(val);
+
+      return (
+        <React.Fragment key={val}>
+          <input
+            type="radio"
+            onChange={handleChange}
+            name={id}
+            checked={value === val}
+          />
+          <label onClick={handleChange} htmlFor={id}>
+            <span>{label}</span>
+          </label>
+        </React.Fragment>
+      );
+    })}
+    {showErrors && error && <span>{error}</span>}
+  </div>
+);
+
+const Radios = withForm(RadioComponent);
+```
 
 #### withFormButton
 
 `withFormButton` is a higher order component that can a submit or action button
+
+Javascript
 
 ```javascript
 const Button = withFormButton(({ children, ...rest }) => (
@@ -109,6 +193,18 @@ const Button = withFormButton(({ children, ...rest }) => (
     {children}
   </button>
 ));
+```
+
+Typescript
+
+```typescript
+const ButtonComponent: React.SFC<any> = ({ children, ...rest }) => (
+  <button type="button" {...rest}>
+    {children}
+  </button>
+);
+
+const Button = withFormButton(ButtonComponent);
 ```
 
 ## Errors

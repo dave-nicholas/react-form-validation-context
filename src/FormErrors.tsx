@@ -2,8 +2,8 @@ import React from 'react';
 import { IGetErrors } from '.';
 
 export interface IFormErrors {
-  render: (error: string, id: string) => void;
-  errorsFor: string | string[];
+  render?: (error: string, id: string) => JSX.Element;
+  errorsFor?: string | string[];
 }
 
 export const makeFormErrors = (

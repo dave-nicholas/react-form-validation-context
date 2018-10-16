@@ -6,6 +6,11 @@ import { makeForm } from './Form';
 import { makeFormErrors } from './FormErrors';
 import * as validators from './Validators';
 
+export { IClickable } from './Button';
+export { IWithForm, IInputComponent } from './Input';
+export { IFormCallback } from './Form';
+export { IFormErrors } from './FormErrors';
+
 export interface IInputErrors { [index: string]: string[] }
 export interface IShowErrors { [index: string]: boolean }
 export interface ISetError { (k: string, errors: string[]): void }

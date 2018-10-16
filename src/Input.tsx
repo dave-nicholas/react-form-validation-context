@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { ISetError, ISetShowError, IGetErrors } from './';
 
-interface PropsType {
+export interface IWithForm {
   invalidateParentForm: () => void;
   id: string 
   setShowError: ISetShowError;
@@ -10,7 +10,15 @@ interface PropsType {
   C: React.ComponentClass;
 }
 
-class FormInput extends React.Component<PropsType, {}> {
+export interface IInputComponent {
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  error: string;
+  showErrors: boolean;
+}
+
+
+class FormInput extends React.Component<IWithForm, {}> {
   componentDidMount() {
     const { invalidateParentForm } = this.props;
     this.reset();
@@ -38,9 +46,9 @@ export const makeWithForm = (
   setError: ISetError,
   setShowError: ISetShowError,
   getErrors: IGetErrors
-) => (C: React.ComponentClass) => (passedProps:any) => (
+) => (C: React.ComponentClass | React.StatelessComponent<any>) => (passedProps:any) => (
   <Consumer>
-    {({ invalidateParentForm }: PropsType) => {
+    {({ invalidateParentForm }: IWithForm) => {
       const { id, value, validations, checked, hideErrors } = passedProps;
       if (typeof id === 'undefined') {
         throw new Error(

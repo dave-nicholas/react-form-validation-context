@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
-export interface PropsType {
-  onErrorCallback: () => void;
+export interface IFormCallback {
+  onErrorCallback?: () => void;
 }
 
 export const makeForm = (
   Provider: React.ComponentType<React.ProviderProps<any>>,
   resetErrors: () => void
-): React.ComponentClass<PropsType, {}> => {
-  class Form extends Component<PropsType, {}> {
+): React.ComponentClass<IFormCallback, {}> => {
+  class Form extends Component<IFormCallback, {}> {
     state = {
       isValid: null,
       // The below line is here becasue forceUpdate doesn't seem to work with context
