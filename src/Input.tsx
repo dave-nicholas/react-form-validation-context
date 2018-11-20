@@ -19,15 +19,44 @@ export interface IInputComponent {
 
 
 class FormInput extends React.Component<IWithForm, {}> {
+
+  family: any
+  f: any
+
   componentDidMount() {
-    const { invalidateParentForm } = this.props;
+    const {id,  invalidateParentForm } = this.props;
     this.reset();
+
+    this.family = document.querySelectorAll(
+      `input[id=${id}], *[id=${id}] input`
+    );
+
+    this.f =
+      this.family.length < 2
+        ? (_f:any) => _f()
+        : (_f:any) =>
+            setTimeout(() => {
+              if (!document.querySelector(`*[id=${id}] input:focus`)) {
+                _f();
+              }
+            }, 200);
+    this.f = (_f:any) => _f();
+    this.family.forEach((element:any) => element.addEventListener('blur', this.blur));
+
     invalidateParentForm();
   }
 
   componentWillUnmount() {
     this.reset();
   }
+
+  blur = () => {
+    const { id, setShowError, invalidateParentForm } = this.props;
+    this.f(() => {
+      setShowError(id, true);
+      invalidateParentForm();
+    });
+  };
 
   reset() {
     const { id, setShowError, seterror } = this.props;
