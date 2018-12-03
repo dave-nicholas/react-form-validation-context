@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import './nodeListForEachPolyFill';
+
 import { makeWithFormButton } from './Button';
 import { makeWithForm } from './Input';
 import { makeForm } from './Form';
@@ -11,10 +13,18 @@ export { IWithForm, IInputComponent } from './Input';
 export { IFormCallback } from './Form';
 export { IFormErrors } from './FormErrors';
 
-export interface IInputErrors { [index: string]: string[] }
-export interface IShowErrors { [index: string]: boolean }
-export interface ISetError { (k: string, errors: string[]): void }
-export interface ISetShowError { (k: string, show?: boolean): void }
+export interface IInputErrors {
+  [index: string]: string[];
+}
+export interface IShowErrors {
+  [index: string]: boolean;
+}
+export interface ISetError {
+  (k: string, errors: string[]): void;
+}
+export interface ISetShowError {
+  (k: string, show?: boolean): void;
+}
 export interface IGetErrors {
   (): { inputErrors: IInputErrors, showErrors: IShowErrors };
 }
