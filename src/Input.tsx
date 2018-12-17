@@ -40,7 +40,7 @@ class FormInput extends React.Component<IWithForm, {}> {
                 _f();
               }
             }, 200);
-    this.f = (_f:any) => _f();
+
     this.family.forEach((element:any) => element.addEventListener('blur', this.blur));
 
     invalidateParentForm();
