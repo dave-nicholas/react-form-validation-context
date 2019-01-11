@@ -267,6 +267,7 @@ You can use the `FormErrors` component to display errors for specific components
 `validators.address`
 `validators.postcode`
 `validators.allowedValues`
+`validators.stringMatch`
 
 
 ### Example

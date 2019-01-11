@@ -13,7 +13,8 @@ import {
   onlyAlphaNumeric,
   address,
   postcode,
-  allowedValues
+  allowedValues,
+  stringMatch
 } from '../Validators';
 
 describe('Input validator', () => {
@@ -234,4 +235,31 @@ describe('Input validator', () => {
       )
     ).toEqual('Please enter a valid option');
   });
+
+  it('stringMatch - valid', () => {
+    expect(
+      stringMatch('I understand')(
+        'I understand'
+      )
+    ).toEqual(false);
+  });
+
+
+  it('stringMatch - Invalid', () => {
+    expect(
+      stringMatch('I understand')(
+        'I do not understand'
+      )
+    ).toEqual('Please enter exactly: "I understand"');
+  });
+
+  it('stringMatch with message - Invalid', () => {
+    expect(
+      stringMatch('I understand', "please enter the phrase above")(
+        'I do not understand'
+      )
+    ).toEqual('please enter the phrase above');
+  });
+
+
 });

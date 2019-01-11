@@ -24,15 +24,15 @@ export const exactLength = (length: number) => (value: string) =>
   `This should be ${length} digits long`;
 
 export const minValue = (min: number, message?: string) => (value: string | number) => {
-  const v = typeof value === 'string' ? parseInt(value, 10): value;
+  const v = typeof value === 'string' ? parseInt(value, 10) : value;
   return (
     (Number.isNaN(v) ? 0 : v) < min &&
     (message || `Please enter an amount greater than ${min}`)
   );
 };
 
-export const maxValue = (max: number, message?: string) => (value: string| number) => {
-  const v = typeof value === 'string' ? parseInt(value, 10): value;
+export const maxValue = (max: number, message?: string) => (value: string | number) => {
+  const v = typeof value === 'string' ? parseInt(value, 10) : value;
   return (
     (Number.isNaN(v) ? 0 : v) > max &&
     (message || `Your total amount must be less than ${max}`)
@@ -69,7 +69,7 @@ export const alphaNumeric2WithMessage = (message: string) => (value: string) =>
   value && !/^[0-9A-Za-z '-]+$/.test(value.toString()) && message;
 
 export const alphaNumeric2 = (value: string) =>
-  alphaNumeric2WithMessage("Only valid special characters are - '")(value );
+  alphaNumeric2WithMessage("Only valid special characters are - '")(value);
 
 export const onlyAlphaNumeric = (value: string) =>
   value &&
@@ -94,3 +94,9 @@ export const allowedValues = (message: string, values: string[]) => (
   const v = Number.isNaN(parseFloat(value)) ? value : parseFloat(value);
   return !values.includes(v as string) && (message || 'This is not allowed value');
 };
+
+export const stringMatch = (stringToMatch: string, message?: string) => (value: string) =>
+  value &&
+  stringToMatch.localeCompare(value) !== 0 &&
+  (message || `Please enter exactly: "${stringToMatch}"`);
+
