@@ -14,7 +14,8 @@ import {
   address,
   postcode,
   allowedValues,
-  stringMatch
+  stringMatch,
+  passwordStrength
 } from '../Validators';
 
 describe('Input validator', () => {
@@ -237,29 +238,46 @@ describe('Input validator', () => {
   });
 
   it('stringMatch - valid', () => {
-    expect(
-      stringMatch('I understand')(
-        'I understand'
-      )
-    ).toEqual(false);
+    expect(stringMatch('I understand')('I understand')).toEqual(false);
   });
 
-
   it('stringMatch - Invalid', () => {
-    expect(
-      stringMatch('I understand')(
-        'I do not understand'
-      )
-    ).toEqual('Please enter exactly: "I understand"');
+    expect(stringMatch('I understand')('I do not understand')).toEqual(
+      'Please enter exactly: "I understand"'
+    );
   });
 
   it('stringMatch with message - Invalid', () => {
     expect(
-      stringMatch('I understand', "please enter the phrase above")(
+      stringMatch('I understand', 'please enter the phrase above')(
         'I do not understand'
       )
     ).toEqual('please enter the phrase above');
   });
 
-
+  it('passwordStrength - Valid', () => {
+    expect(passwordStrength()('SSSaaaS1')).toEqual(false);
+    expect(passwordStrength()('ABCD1234a')).toEqual(false);
+    expect(passwordStrength()('A1B2C3axxxxx')).toEqual(false);
+    expect(passwordStrength()('@123SXaf')).toEqual(false);
+    expect(passwordStrength()('12345678ABCDEFabcd')).toEqual(false);
+    expect(passwordStrength()('abefd1222D')).toEqual(false);
+  });
+  it('passwordStrength - InValid', () => {
+    expect(passwordStrength('Custom message')('SSSSabc')).toEqual(
+      'Custom message'
+    );
+    expect(passwordStrength('Custom message')('SSSS1234')).toEqual(
+      'Custom message'
+    );
+    expect(passwordStrength('Custom message')('1234abc')).toEqual(
+      'Custom message'
+    );
+    expect(passwordStrength('Custom message')('1ABCabc')).toEqual(
+      'Custom message'
+    );
+    expect(passwordStrength('')('1ABCabc')).toEqual(
+      'Password must have at least 8 characters with at least one Capital letter, at least one lower case letter and at least one number'
+    );
+  });
 });

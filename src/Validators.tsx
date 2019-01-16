@@ -100,3 +100,9 @@ export const stringMatch = (stringToMatch: string, message?: string) => (value: 
   stringToMatch.localeCompare(value) !== 0 &&
   (message || `Please enter exactly: "${stringToMatch}"`);
 
+
+export const passwordStrength =( message?: string)=> (value: string) =>
+  value &&
+  !/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/.test(value.toString()) &&
+  (message||"Password must have at least 8 characters with at least one Capital letter, at least one lower case letter and at least one number");
+
