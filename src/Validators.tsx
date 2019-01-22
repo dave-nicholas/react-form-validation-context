@@ -5,8 +5,8 @@ export const required = (value: string) =>
   requiredWithMessage('This field is required')(value);
 
 export const email = (value: string) =>
-  !/^\S+@\S+\.\S+$/.test(value.toString()) &&
-  'Please enter a valid email address';
+  !/^\S+\@\S+\.+([a-zA-Z0-9]{2,4})+$/.test(value.toString()) &&
+  'Please enter a valid email';
 
 export const maxLength = (length: number, message?: string) => (value: string | number) =>
   value &&

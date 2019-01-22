@@ -1,6 +1,6 @@
 {
   "name": "react-form-validation-context",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "A lightweight react form validation library for functional programming.",
   "main": "dist/index.js",
   "repository": "git@github.com:dave-nicholas/react-form-validation-context.git",
