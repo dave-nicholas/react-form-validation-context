@@ -36,14 +36,14 @@ describe('Input validator', () => {
   });
 
   it('email - Invalid', () => {
-    expect(email(' ')).toEqual('Please enter a valid email address');
-    expect(email('test.')).toEqual('Please enter a valid email address');
-    expect(email('test@')).toEqual('Please enter a valid email address');
-    expect(email('test@g')).toEqual('Please enter a valid email address');
-    expect(email('test@g.')).toEqual('Please enter a valid email address');
+    expect(email(' ')).toEqual('Please enter a valid email');
+    expect(email('test.')).toEqual('Please enter a valid email');
+    expect(email('test@')).toEqual('Please enter a valid email');
+    expect(email('test@g')).toEqual('Please enter a valid email');
+    expect(email('test@g.')).toEqual('Please enter a valid email');
+    expect(email('test@g.c')).toEqual('Please enter a valid email');
   });
   it('email -Valid', () => {
-    expect(email('test@g.c')).toEqual(false);
     expect(email('test@gmail.com')).toEqual(false);
   });
 
